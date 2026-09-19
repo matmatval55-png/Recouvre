@@ -65,7 +65,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-ink">29&nbsp;€/mois</h2>
           <p className="text-ink/70 mt-2">Factures illimitées. Sans engagement.</p>
           <a
-            href="#"
+            href="/api/checkout"
             className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-rust px-8 py-4 text-base font-semibold text-white active:scale-[0.98] transition"
           >
             Essayer Recouvre
