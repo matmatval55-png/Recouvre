@@ -6,8 +6,15 @@ import { NextResponse } from "next/server";
 const SEUILS: Record<RelanceType, number> = { j7: 7, j15: 15, j30: 30 };
 
 export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
   const authHeader = request.headers.get("authorization");
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const secretParam = searchParams.get("secret");
+
+  const autorise =
+    authHeader === `Bearer ${process.env.CRON_SECRET}` ||
+    secretParam === process.env.CRON_SECRET;
+
+  if (!autorise) {
     return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
   }
 
