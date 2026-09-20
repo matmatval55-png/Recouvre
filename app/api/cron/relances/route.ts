@@ -52,8 +52,8 @@ export async function GET(request: Request) {
       if (invoice.client_email && expediteurEmail) {
         const { sujet, corps } = texteRelance(type, invoice);
 
-        await resend.emails.send({
-          from: "Recouvre <onboarding@resend.dev>",
+                await resend.emails.send({
+          from: "Recouvre <relances@recouvre.cloud>",
           to: invoice.client_email,
           replyTo: expediteurEmail,
           subject: sujet,
