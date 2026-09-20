@@ -22,6 +22,12 @@ export default async function Compte() {
           <span className="font-serif font-bold text-ink text-lg">Recouvre</span>
           <div className="flex items-center gap-4">
             <p className="text-sm text-ink/60">{user.email}</p>
+            <a
+              href="/api/portal"
+              className="text-sm text-ink/60 underline underline-offset-2"
+            >
+              Gérer mon abonnement
+            </a>
             <DeconnexionButton />
           </div>
         </div>
