@@ -4,5 +4,10 @@
 
 body {
   background-color: #FAF7F2;
-  color: #1B2A4A;
+  color: #131F38;
+}
+
+.ledger-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #131F38 0%, #131F38 70%, #C8622A 70%, #C8622A 100%);
 }
