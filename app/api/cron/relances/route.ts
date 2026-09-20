@@ -38,7 +38,13 @@ export async function GET(request: Request) {
       const { data: dejaEnvoyee } = await supabase
         .from("reminders")
         .select("id")
-            const { data: userData } = await supabase.auth.admin.getUserById(
+        .eq("invoice_id", invoice.id)
+        .eq("type", type)
+        .maybeSingle();
+
+      if (dejaEnvoyee) continue;
+
+      const { data: userData } = await supabase.auth.admin.getUserById(
         invoice.user_id
       );
       const expediteurEmail = userData?.user?.email;
@@ -47,15 +53,8 @@ export async function GET(request: Request) {
 
       if (invoice.client_email && expediteurEmail) {
         const { sujet, corps } = texteRelance(type, invoice, expediteurNom);
-(
-        invoice.user_id
-      );
-      const expediteurEmail = userData?.user?.email;
 
-      if (invoice.client_email && expediteurEmail) {
-        const { sujet, corps } = texteRelance(type, invoice);
-
-                await resend.emails.send({
+        await resend.emails.send({
           from: "Recouvre <relances@recouvre.cloud>",
           to: invoice.client_email,
           replyTo: expediteurEmail,
