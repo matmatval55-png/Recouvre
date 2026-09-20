@@ -1,6 +1,7 @@
 import { stripe } from "@/lib/stripe";
 import Link from "next/link";
 import Footer from "../../components/Footer";
+import EnvoiLienConnexion from "../../components/EnvoiLienConnexion";
 
 export default async function PaiementSucces({
   searchParams,
@@ -33,9 +34,9 @@ export default async function PaiementSucces({
             <h1 className="text-2xl font-bold text-ink mb-2">Merci !</h1>
             <p className="text-ink/70 max-w-sm">
               Votre abonnement Recouvre est actif
-              {email ? ` pour ${email}` : ""}. L'accès à votre compte arrive
-              à l'étape suivante du build.
+              {email ? ` pour ${email}` : ""}.
             </p>
+            {email && <EnvoiLienConnexion email={email} />}
           </>
         ) : (
           <>
