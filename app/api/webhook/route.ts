@@ -1,4 +1,5 @@
 import { stripe } from "@/lib/stripe";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 
@@ -23,8 +24,21 @@ export async function POST(request: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
-    console.log("Paiement confirmé pour :", session.customer_details?.email);
-    // La création automatique du compte sera ajoutée à l'étape suivante.
+    const email = session.customer_details?.email;
+
+    if (email) {
+      const supabaseAdmin = createAdminClient();
+
+      await supabaseAdmin.from("subscriptions").upsert(
+        {
+          email,
+          stripe_customer_id: session.customer as string,
+          stripe_subscription_id: session.subscription as string,
+          status: "active",
+        },
+        { onConflict: "stripe_customer_id" }
+      );
+    }
   }
 
   return NextResponse.json({ received: true });
