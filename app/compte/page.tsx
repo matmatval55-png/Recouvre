@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Footer from "../components/Footer";
+import DeconnexionButton from "../components/DeconnexionButton";
+import GestionFactures from "../components/GestionFactures";
 
 export default async function Compte() {
   const supabase = createClient();
@@ -14,16 +16,12 @@ export default async function Compte() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-        <p className="text-sm uppercase tracking-widest text-rust font-semibold mb-4">
-          Connecté
-        </p>
-        <h1 className="text-2xl font-bold text-ink mb-2">
-          Bienvenue, {user.email}
-        </h1>
-        <p className="text-ink/70">
-          L'application arrive à l'étape suivante.
-        </p>
+      <main className="flex-1 px-6 py-10">
+        <div className="max-w-2xl mx-auto flex items-center justify-between mb-8">
+          <p className="text-sm text-ink/60">{user.email}</p>
+          <DeconnexionButton />
+        </div>
+        <GestionFactures />
       </main>
       <Footer />
     </div>
