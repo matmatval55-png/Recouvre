@@ -1,8 +1,18 @@
 import Footer from "./components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
+      <header className="px-6 py-4 flex items-center justify-between max-w-4xl mx-auto w-full">
+        <span className="font-bold text-ink">Recouvre</span>
+        <Link
+          href="/login"
+          className="text-sm font-semibold text-ink border border-ink/20 rounded-lg px-4 py-2"
+        >
+          Se connecter
+        </Link>
+      </header>
       <main className="flex-1">
         {/* Hero */}
         <section className="px-6 pt-14 pb-10 max-w-lg mx-auto text-center">
