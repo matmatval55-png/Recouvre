@@ -45,5 +45,21 @@ export async function POST(request: Request) {
     }
   }
 
+  if (
+    event.type === "customer.subscription.updated" ||
+    event.type === "customer.subscription.deleted"
+  ) {
+    const subscription = event.data.object as Stripe.Subscription;
+    const supabaseAdmin = createAdminClient();
+
+    const nouveauStatut =
+      subscription.status === "active" ? "active" : "canceled";
+
+    await supabaseAdmin
+      .from("subscriptions")
+      .update({ status: nouveauStatut })
+      .eq("stripe_customer_id", subscription.customer as string);
+  }
+
   return NextResponse.json({ received: true });
 }
