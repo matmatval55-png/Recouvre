@@ -18,6 +18,8 @@ export async function GET(request: Request) {
     .from("subscriptions")
     .select("stripe_customer_id")
     .eq("email", user.email)
+    .order("created_at", { ascending: false })
+    .limit(1)
     .maybeSingle();
 
   if (!subscription?.stripe_customer_id) {
