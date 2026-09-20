@@ -38,13 +38,16 @@ export async function GET(request: Request) {
       const { data: dejaEnvoyee } = await supabase
         .from("reminders")
         .select("id")
-        .eq("invoice_id", invoice.id)
-        .eq("type", type)
-        .maybeSingle();
+            const { data: userData } = await supabase.auth.admin.getUserById(
+        invoice.user_id
+      );
+      const expediteurEmail = userData?.user?.email;
+      const expediteurNom =
+        userData?.user?.user_metadata?.display_name || expediteurEmail;
 
-      if (dejaEnvoyee) continue;
-
-      const { data: userData } = await supabase.auth.admin.getUserById(
+      if (invoice.client_email && expediteurEmail) {
+        const { sujet, corps } = texteRelance(type, invoice, expediteurNom);
+(
         invoice.user_id
       );
       const expediteurEmail = userData?.user?.email;
