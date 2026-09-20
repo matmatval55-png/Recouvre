@@ -7,9 +7,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#1B2A4A",
+        ink: "#131F38",
         rust: "#C8622A",
         paper: "#FAF7F2",
+      },
+      fontFamily: {
+        serif: ['"Source Serif 4"', "Georgia", "serif"],
       },
     },
   },
