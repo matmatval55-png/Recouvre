@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 
 type Invoice = {
   id: string;
@@ -209,6 +210,12 @@ export default function GestionFactures() {
                   <option value="reminded">{STATUT_LABEL.reminded}</option>
                   <option value="paid">{STATUT_LABEL.paid}</option>
                 </select>
+                <Link
+                  href={`/compte/mise-en-demeure/${inv.id}`}
+                  className="block text-xs text-ink/50 underline underline-offset-2 mt-1"
+                >
+                  Mise en demeure
+                </Link>
               </div>
             </div>
           ))}
