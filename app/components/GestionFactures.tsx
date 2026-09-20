@@ -97,25 +97,25 @@ export default function GestionFactures() {
     <div className="w-full max-w-2xl mx-auto">
       {/* Résumé */}
       <div className="grid grid-cols-3 gap-3 mb-8">
-        <div className="bg-white border border-ink/10 rounded-lg p-4 text-center">
+        <div className="bg-white border border-ink/10 rounded-md p-4 text-center">
           <p className="text-xs uppercase tracking-wide text-ink/50">Dû</p>
-          <p className="text-lg font-bold text-ink mt-1">
+          <p className="font-serif text-lg font-bold text-ink mt-1">
             {formatEuros(totaux.due)}
           </p>
         </div>
-        <div className="bg-white border border-ink/10 rounded-lg p-4 text-center">
+        <div className="bg-white border border-ink/10 rounded-md p-4 text-center">
           <p className="text-xs uppercase tracking-wide text-ink/50">
             Relancé
           </p>
-          <p className="text-lg font-bold text-rust mt-1">
+          <p className="font-serif text-lg font-bold text-rust mt-1">
             {formatEuros(totaux.reminded)}
           </p>
         </div>
-        <div className="bg-white border border-ink/10 rounded-lg p-4 text-center">
+        <div className="bg-white border border-ink/10 rounded-md p-4 text-center">
           <p className="text-xs uppercase tracking-wide text-ink/50">
             Encaissé
           </p>
-          <p className="text-lg font-bold text-ink/40 mt-1">
+          <p className="font-serif text-lg font-bold text-ink/40 mt-1">
             {formatEuros(totaux.paid)}
           </p>
         </div>
@@ -124,7 +124,7 @@ export default function GestionFactures() {
       {/* Formulaire d'ajout */}
       <form
         onSubmit={handleAdd}
-        className="bg-white border border-ink/10 rounded-lg p-4 mb-8 flex flex-col gap-3"
+        className="bg-white border border-ink/10 rounded-md p-4 mb-8 flex flex-col gap-3"
       >
         <p className="font-semibold text-ink">Ajouter une facture</p>
         <input
@@ -133,14 +133,14 @@ export default function GestionFactures() {
           placeholder="Nom du client"
           value={clientName}
           onChange={(e) => setClientName(e.target.value)}
-          className="rounded-lg border border-ink/20 px-3 py-2"
+          className="rounded-md border border-ink/20 px-3 py-2"
         />
         <input
           type="email"
           placeholder="Email du client (optionnel)"
           value={clientEmail}
           onChange={(e) => setClientEmail(e.target.value)}
-          className="rounded-lg border border-ink/20 px-3 py-2"
+          className="rounded-md border border-ink/20 px-3 py-2"
         />
         <div className="flex gap-3">
           <input
@@ -150,20 +150,20 @@ export default function GestionFactures() {
             placeholder="Montant (€)"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="rounded-lg border border-ink/20 px-3 py-2 flex-1"
+            className="rounded-md border border-ink/20 px-3 py-2 flex-1"
           />
           <input
             type="date"
             required
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
-            className="rounded-lg border border-ink/20 px-3 py-2 flex-1"
+            className="rounded-md border border-ink/20 px-3 py-2 flex-1"
           />
         </div>
         <button
           type="submit"
           disabled={saving}
-          className="rounded-lg bg-ink text-paper font-semibold py-2 disabled:opacity-60"
+          className="rounded-md bg-ink text-paper font-semibold py-2 disabled:opacity-60"
         >
           {saving ? "Ajout…" : "Ajouter"}
         </button>
@@ -182,7 +182,7 @@ export default function GestionFactures() {
           {invoices.map((inv) => (
             <div
               key={inv.id}
-              className="bg-white border border-ink/10 rounded-lg p-4 flex items-center justify-between gap-3"
+              className="bg-white border border-ink/10 rounded-md p-4 flex items-center justify-between gap-3"
             >
               <div className="min-w-0">
                 <p className="font-semibold text-ink truncate">
@@ -193,7 +193,7 @@ export default function GestionFactures() {
                 </p>
               </div>
               <div className="text-right shrink-0">
-                <p className="font-semibold text-ink">
+                <p className="font-serif font-semibold text-ink">
                   {formatEuros(Number(inv.amount))}
                 </p>
                 <select
@@ -204,7 +204,7 @@ export default function GestionFactures() {
                       e.target.value as Invoice["status"]
                     )
                   }
-                  className="text-sm border border-ink/20 rounded px-2 py-1 mt-1"
+                  className="text-sm border border-ink/20 rounded-md px-2 py-1 mt-1"
                 >
                   <option value="due">{STATUT_LABEL.due}</option>
                   <option value="reminded">{STATUT_LABEL.reminded}</option>
