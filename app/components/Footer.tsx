@@ -15,6 +15,9 @@ export default function Footer() {
           <Link href="/confidentialite" className="hover:text-ink underline underline-offset-2">
             Confidentialité
           </Link>
+          <Link href="/login" className="hover:text-ink underline underline-offset-2">
+            Déjà client ? Se connecter
+          </Link>
         </nav>
       </div>
     </footer>
