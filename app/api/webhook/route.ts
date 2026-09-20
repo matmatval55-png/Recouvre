@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     if (email) {
       const supabaseAdmin = createAdminClient();
 
-      await supabaseAdmin.from("subscriptions").upsert(
+      const { error } = await supabaseAdmin.from("subscriptions").upsert(
         {
           email,
           stripe_customer_id: session.customer as string,
@@ -38,6 +38,10 @@ export async function POST(request: Request) {
         },
         { onConflict: "stripe_customer_id" }
       );
+
+      if (error) {
+        console.error("Erreur Supabase (subscriptions) :", error.message);
+      }
     }
   }
 
