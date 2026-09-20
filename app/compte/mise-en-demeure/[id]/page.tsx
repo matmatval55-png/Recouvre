@@ -24,7 +24,11 @@ export default async function MiseEnDemeure({
 
   if (!invoice) notFound();
 
-  const lettre = texteMiseEnDemeure(invoice, user.email!);
+  const lettre = texteMiseEnDemeure(
+    invoice,
+    user.email!,
+    user.user_metadata?.display_name
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
